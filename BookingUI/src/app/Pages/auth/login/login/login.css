@@ -1,0 +1,219 @@
+/* Shared auth form styles — import this in both login & register,
+   OR place in auth-layout if you prefer a single stylesheet */
+
+/* ─── Container ──────────────────────────────────────────────── */
+.auth-form-container {
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.form-header {
+  margin-bottom: 40px;
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 15px;
+    color: #6b7280;
+    font-weight: 300;
+  }
+}
+
+/* ─── Form Fields ─────────────────────────────────────────────── */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.input-wrapper {
+  position: relative;
+
+  .input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    color: #111827;
+    background: #f9fafb;
+    outline: none;
+    transition:
+      border-color 0.15s,
+      background 0.15s,
+      box-shadow 0.15s;
+
+    &::placeholder {
+      color: #c4cad3;
+    }
+
+    &:focus {
+      border-color: #185fa5;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.1);
+    }
+  }
+}
+
+/* ─── Remember / Forgot row ──────────────────────────────────── */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  .form-check-input {
+    width: 15px;
+    height: 15px;
+    accent-color: #185fa5;
+    cursor: pointer;
+  }
+
+  .form-check-label {
+    font-size: 13px;
+    color: #4b5563;
+    cursor: pointer;
+  }
+}
+
+.forgot-link {
+  font-size: 14px;
+  color: #185fa5;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ─── Primary Button ─────────────────────────────────────────── */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: #185fa5;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+  margin-bottom: 20px;
+
+  i {
+    font-size: 17px;
+  }
+
+  &:hover {
+    background: #0c447c;
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* ─── Divider ────────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+
+  span {
+    font-size: 12px;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+}
+
+/* ─── Social Button ──────────────────────────────────────────── */
+.btn-social {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+  margin-bottom: 32px;
+
+  &:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+  }
+}
+
+/* ─── Auth Link ──────────────────────────────────────────────── */
+.auth-link {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+
+  a {
+    color: #185fa5;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

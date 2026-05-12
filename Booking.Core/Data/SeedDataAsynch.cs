@@ -36,24 +36,34 @@ namespace Booking.Core.Data
                 {
                     new Trip
                     {
-                        FromCity = "Cairo",
-                        ToCity = "Dubai",
-                        Price = 5000,
-                        ImageUrl = "dubai.jpg"
-                    },
-                    new Trip
-                    {
                         FromCity = "Alexandria",
                         ToCity = "Istanbul",
                         Price = 7000,
-                        ImageUrl = "istanbul.jpg"
+                        ImageUrl = "France.webp"
                     },
+                
                     new Trip
                     {
                         FromCity = "Cairo",
                         ToCity = "Paris",
                         Price = 12000,
-                        ImageUrl = "paris.jpg"
+                        ImageUrl = "Paris.jpg"
+                    },
+                
+                    new Trip
+                    {
+                        FromCity = "Cairo",
+                        ToCity = "France",
+                        Price = 12322,
+                        ImageUrl = "string"
+                    },
+                
+                    new Trip
+                    {
+                        FromCity = "Cairo",
+                        ToCity = "Rome",
+                        Price = 15000,
+                        ImageUrl = "Egypt.jpg"
                     }
                 };
 

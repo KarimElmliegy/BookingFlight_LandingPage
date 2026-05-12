@@ -4,30 +4,30 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Booking_API.Controllers
+namespace BookingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class TripsController : ControllerBase
     {
-        private readonly ITripService _tripService;
-
-        public TripsController(ITripService tripService)
+        private readonly IServiceManager _serviceManager; 
+        public TripsController(IServiceManager serviceManager)
         {
-            _tripService = tripService;
+            _serviceManager = serviceManager;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var trips = await _tripService.GetAllTripsAsync();
+            var trips = await _serviceManager.TripService.GetAllTripsAsync();
             return Ok(trips);
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
-            var trip = await _tripService.GetTripByIdAsync(id);
+            var trip = await _serviceManager.TripService.GetTripByIdAsync(id);
 
             if (trip is null)
                 return NotFound();
@@ -36,26 +36,29 @@ namespace Booking_API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateTripDto dto)
         {
-            await _tripService.CreateTripAsync(dto);
+            await _serviceManager.TripService.CreateTripAsync(dto);
             return Ok();
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateTripDto dto)
         {
             if (id != dto.Id)
                 return BadRequest();
 
-            await _tripService.UpdateTripAsync(id, dto);
+            await _serviceManager.TripService.UpdateTripAsync(id, dto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            await _tripService.DeleteTripAsync(id);
+            await _serviceManager.TripService.DeleteTripAsync(id);
             return NoContent();
         }
     }

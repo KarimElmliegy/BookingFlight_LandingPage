@@ -1,20 +1,23 @@
 ﻿using Booking.Core.DTO;
+using Booking.Core.Services;
 using Booking.Core.Services.Contract;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace BookingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ContactUsController : ControllerBase
     {
-        private readonly IContactUsService _contactUsService;
+        private readonly IServiceManager _serviceManager;
 
-        public ContactUsController(IContactUsService contactUsService)
+        public ContactUsController(IServiceManager serviceManager)
         {
-            _contactUsService = contactUsService;
+            _serviceManager = serviceManager;
         }
 
         [HttpPost("send-message")]
@@ -28,7 +31,7 @@ namespace BookingSystem.API.Controllers
             if (!int.TryParse(userIdValue, out var userId))
                 return Unauthorized();
 
-            await _contactUsService.SendMessageAsync(userId, dto);
+            await _serviceManager.ContactUsService.SendMessageAsync(userId, dto);
 
             return Ok(new
             {
@@ -36,5 +39,4 @@ namespace BookingSystem.API.Controllers
             });
         }
     }
-
 }

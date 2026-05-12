@@ -1,0 +1,56 @@
+<nav class="skyline-nav">
+  <div class="nav-container">
+    <!-- Brand -->
+    <a class="nav-brand" routerLink="/home">
+      <div class="brand-icon">
+        <i class="ti ti-plane-departure"></i>
+      </div>
+      <span class="brand-text">SkyLine</span>
+    </a>
+
+    <!-- Links -->
+    <ul class="nav-links">
+      <li>
+        <a (click)="scrollTo('hero')" class="nav-link" [class.active]="activeSection === 'hero'"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="scrollTo('destinations')"
+          class="nav-link"
+          [class.active]="activeSection === 'destinations'"
+          >Destinations</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="scrollTo('my-tickets')"
+          class="nav-link"
+          [class.active]="activeSection === 'my-tickets'"
+          >My Tickets</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="scrollTo('contact')"
+          class="nav-link"
+          [class.active]="activeSection === 'contact'"
+          >Contact</a
+        >
+      </li>
+    </ul>
+
+    <!-- User -->
+    <div class="nav-user">
+      <div class="user-avatar">
+        <i class="ti ti-user"></i>
+      </div>
+      <span class="user-name">{{ displayName }}</span>
+      <button class="btn-logout" (click)="logout()">
+        <i class="ti ti-logout"></i>
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>

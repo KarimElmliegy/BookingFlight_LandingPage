@@ -1,0 +1,93 @@
+<div class="auth-form-container">
+  <!-- Alert -->
+  <div
+    *ngIf="showAlert"
+    class="alert position-fixed top-0 end-0 m-3"
+    [ngClass]="alertType === 'success' ? 'alert-success' : 'alert-danger'"
+    style="z-index: 1050"
+  >
+    {{ alertMessage }}
+  </div>
+  <!-- Header -->
+  <div class="form-header">
+    <h1>Welcome Back</h1>
+    <p>Sign in to continue your adventure</p>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- Email -->
+    <div class="form-group">
+      <label for="Email" class="form-label">Email</label>
+      <div class="input-wrapper">
+        <i class="ti ti-mail input-icon"></i>
+        <input
+          id="Email"
+          type="email"
+          placeholder="you@example.com"
+          class="form-control"
+          formControlName="Email"
+        />
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="Password" class="form-label">Password</label>
+      <div class="input-wrapper">
+        <i class="ti ti-lock input-icon"></i>
+        <input
+          id="Password"
+          type="password"
+          placeholder="••••••••"
+          class="form-control"
+          formControlName="Password"
+        />
+      </div>
+    </div>
+
+    <!-- Remember + Forgot -->
+    <div class="form-row">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="remember" />
+        <label class="form-check-label" for="remember">Remember me</label>
+      </div>
+      <a href="#" class="forgot-link">Forgot password?</a>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">
+      <i class="ti ti-login"></i> Login
+    </button>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>or continue with</span>
+    </div>
+
+    <!-- Google -->
+    <button type="button" class="btn-social">
+      <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
+        <path
+          d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6-6C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.7 20-21 0-1.4-.2-2.7-.5-4z"
+          fill="#FFC107"
+        />
+        <path
+          d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6-6C34.6 5.1 29.6 3 24 3c-7.6 0-14.2 4.1-17.7 10.7z"
+          fill="#FF3D00"
+        />
+        <path
+          d="M24 45c5.5 0 10.5-2 14.3-5.4l-6.6-5.6C29.6 35.8 26.9 37 24 37c-5.8 0-10.7-3.9-12.4-9.3l-7 5.4C8.1 40.8 15.5 45 24 45z"
+          fill="#4CAF50"
+        />
+        <path
+          d="M44.5 20H24v8.5h11.8c-.9 2.7-2.7 5-5.1 6.5l6.6 5.6C41.1 37.1 45 31 45 24c0-1.4-.2-2.7-.5-4z"
+          fill="#1976D2"
+        />
+      </svg>
+      Continue with Google
+    </button>
+  </form>
+
+  <!-- Register link -->
+  <p class="auth-link">Don't have an account? <a routerLink="/register">Create one</a></p>
+</div>

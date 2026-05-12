@@ -1,24 +1,24 @@
 ﻿using Booking.Core.DTO;
 using Booking.Core.DTOs;
+using Booking.Core.Services;
 using Booking.Core.Services.Contract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Booking_API.Controllers
+namespace BookingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TicketsController : ControllerBase
     {
-        private readonly ITicketService _ticketService;
+        private readonly IServiceManager _serviceManager;
 
-        public TicketsController(ITicketService ticketService)
+        public TicketsController(IServiceManager serviceManager)
         {
-            _ticketService = ticketService;
+            _serviceManager = serviceManager;
         }
 
         [HttpPost("book")]
@@ -29,7 +29,7 @@ namespace Booking_API.Controllers
             if (!int.TryParse(userIdValue, out var userId))
                 return Unauthorized();
 
-            var ticket = await _ticketService.BookTripAsync(userId, dto.TripId);
+            var ticket = await _serviceManager.TicketService.BookTripAsync(userId, dto.TripId);
             return Ok(ticket);
         }
 
@@ -41,14 +41,14 @@ namespace Booking_API.Controllers
             if (!int.TryParse(userIdValue, out var userId))
                 return Unauthorized();
 
-            var tickets = await _ticketService.GetUserTicketsAsync(userId);
+            var tickets = await _serviceManager.TicketService.GetUserTicketsAsync(userId);
             return Ok(tickets);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTicketDetails(int id)
         {
-            var ticket = await _ticketService.GetTicketDetailsAsync(id);
+            var ticket = await _serviceManager.TicketService.GetTicketDetailsAsync(id);
 
             if (ticket is null)
                 return NotFound();
@@ -67,7 +67,7 @@ namespace Booking_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> CancelTicket(int id)
         {
-            var ticket = await _ticketService.GetTicketDetailsAsync(id);
+            var ticket = await _serviceManager.TicketService.GetTicketDetailsAsync(id);
 
             if (ticket is null)
                 return NotFound();
@@ -80,7 +80,7 @@ namespace Booking_API.Controllers
             if (ticket.UserId != userId)
                 return Forbid();
 
-            await _ticketService.CancelTicketAsync(id);
+            await _serviceManager.TicketService.CancelTicketAsync(id);
             return NoContent();
         }
     }

@@ -1,0 +1,111 @@
+<div class="auth-form-container">
+  <!-- Alert -->
+  <div
+    *ngIf="showAlert"
+    class="alert position-fixed top-0 end-0 m-3"
+    [ngClass]="alertType === 'success' ? 'alert-success' : 'alert-danger'"
+    style="z-index: 1050"
+  >
+    {{ alertMessage }}
+  </div>
+
+  <!-- Header -->
+  <div class="form-header">
+    <h1>Create Account</h1>
+    <p>Register to start booking your trips</p>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Display Name -->
+    <div class="form-group">
+      <label for="DisplayName" class="form-label">Full Name</label>
+      <div class="input-wrapper">
+        <i class="ti ti-user input-icon"></i>
+        <input
+          id="DisplayName"
+          type="text"
+          placeholder="Maria Smith"
+          class="form-control"
+          formControlName="DisplayName"
+        />
+      </div>
+    </div>
+
+    <!-- Username -->
+    <div class="form-group">
+      <label for="UserName" class="form-label">Username</label>
+      <div class="input-wrapper">
+        <i class="ti ti-at input-icon"></i>
+        <input
+          id="UserName"
+          type="text"
+          placeholder="username"
+          class="form-control"
+          formControlName="UserName"
+        />
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="Email" class="form-label">Email</label>
+      <div class="input-wrapper">
+        <i class="ti ti-mail input-icon"></i>
+        <input
+          id="Email"
+          type="email"
+          placeholder="you@example.com"
+          class="form-control"
+          formControlName="Email"
+        />
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="Password" class="form-label">Password</label>
+      <div class="input-wrapper">
+        <i class="ti ti-lock input-icon"></i>
+        <input
+          id="Password"
+          type="password"
+          placeholder="Create a password"
+          class="form-control"
+          formControlName="Password"
+        />
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group">
+      <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+      <div class="input-wrapper">
+        <i class="ti ti-lock-check input-icon"></i>
+        <input
+          id="ConfirmPassword"
+          type="password"
+          placeholder="Repeat your password"
+          class="form-control"
+          formControlName="ConfirmPassword"
+        />
+      </div>
+    </div>
+
+    <!-- Terms -->
+    <div class="form-check terms-check">
+      <input id="terms" type="checkbox" class="form-check-input" />
+      <label for="terms" class="form-check-label">
+        I agree to the <a href="#" class="inline-link">Terms & Conditions</a> and
+        <a href="#" class="inline-link">Privacy Policy</a>
+      </label>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn-primary" [disabled]="registerForm.invalid">
+      <i class="ti ti-user-plus"></i> Create Account
+    </button>
+  </form>
+
+  <!-- Login link -->
+  <p class="auth-link">Already have an account? <a routerLink="/login">Sign in</a></p>
+</div>

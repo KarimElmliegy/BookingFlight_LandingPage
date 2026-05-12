@@ -1,0 +1,106 @@
+.form-group {
+  margin-bottom: 16px;
+}
+
+/* Terms checkbox row */
+.terms-check {
+  margin-bottom: 24px;
+  align-items: flex-start;
+
+  .form-check-input {
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .form-check-label {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+}
+
+.inline-link {
+  color: #185fa5;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+/* PRIMARY BUTTON */
+.btn-primary {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* ICON */
+.btn-primary i {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 24px rgba(37, 99, 235, 0.25),
+    0 4px 10px rgba(37, 99, 235, 0.15);
+
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+/* ICON MOVE ON HOVER */
+.btn-primary:hover i {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* CLICK EFFECT */
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* SHINY ANIMATION */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+.btn-primary:hover::before {
+  left: 130%;
+}
+
+/* DISABLED */
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

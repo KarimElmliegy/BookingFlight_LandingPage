@@ -15,6 +15,8 @@ namespace BookingSystem.API.Helpers.Profiles
                 .ForMember(dest => dest.FromCity, opt => opt.MapFrom(src => src.Trip.FromCity))
                 .ForMember(dest => dest.ToCity, opt => opt.MapFrom(src => src.Trip.ToCity))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
+
+            CreateMap<CreateContactUsDto , ContactUsMessage >().ReverseMap();
         }
     }
 }

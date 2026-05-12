@@ -1,0 +1,253 @@
+<!-- Alert Toast -->
+<div
+  *ngIf="showAlert"
+  class="alert-toast"
+  [class.alert-success]="alertType === 'success'"
+  [class.alert-danger]="alertType === 'danger'"
+>
+  <i [class]="alertType === 'success' ? 'ti ti-circle-check' : 'ti ti-alert-circle'"></i>
+  <span>{{ alertMessage }}</span>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Fly With Confidence Across The World</h1>
+    <p class="hero-subtitle">Safe flights • Modern aircraft • Affordable fares</p>
+    <div class="hero-btns">
+      <button class="btn-primary" (click)="scrollTo('destinations')">
+        <i class="ti ti-ticket"></i> Book Your Flight
+      </button>
+      <button class="btn-ghost" (click)="scrollTo('destinations')">
+        <i class="ti ti-map-pin"></i> View Destinations
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS (CAROUSEL) -->
+<!-- DESTINATIONS (CAROUSEL) -->
+<section
+  id="destinations"
+  class="section destinations-section"
+  *ngIf="!isLoadingTrips && trips.length > 0"
+>
+  <div class="section-container">
+    <h2 class="section-title">Popular Destinations</h2>
+
+    <div class="dest-carousel-wrapper">
+      <div class="dest-carousel-viewport">
+        <!-- Dynamic track width: (trips / visibleCount) * 100% -->
+        <div
+          class="dest-carousel-track"
+          [style.width]="(trips.length / visibleCount) * 100 + '%'"
+          [style.transform]="'translateX(-' + carouselIndex * (100 / trips.length) + '%)'"
+        >
+          <div
+            class="dest-carousel-item"
+            *ngFor="let trip of trips"
+            [style.flex]="'0 0 ' + 100 / trips.length + '%'"
+          >
+            <div class="trip-card">
+              <div class="trip-image">
+                <img
+                  [src]="getTripImageUrl(trip.imageUrl, trip.fromCity, trip.toCity)"
+                  [alt]="trip.fromCity + ' to ' + trip.toCity"
+                  loading="lazy"
+                />
+                <div class="trip-badge">
+                  <i class="ti ti-plane-departure"></i>
+                </div>
+              </div>
+              <div class="trip-info">
+                <div class="trip-route">
+                  <div class="city">
+                    <span class="city-label">From</span>
+                    <span class="city-name">{{ trip.fromCity }}</span>
+                  </div>
+                  <div class="route-divider">
+                    <span class="route-line"></span>
+                    <i class="ti ti-plane"></i>
+                    <span class="route-line"></span>
+                  </div>
+                  <div class="city city-right">
+                    <span class="city-label">To</span>
+                    <span class="city-name">{{ trip.toCity }}</span>
+                  </div>
+                </div>
+                <div class="trip-footer">
+                  <div class="trip-price">
+                    <span class="price-amount">{{ trip.price | number: '1.0-0' }}</span>
+                    <span class="price-currency">EGP</span>
+                  </div>
+                  <button class="btn-book-now" (click)="bookTrip(trip.id)">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls row -->
+      <div class="dest-carousel-controls">
+        <button
+          class="dest-carousel-btn"
+          (click)="prevSlide()"
+          [disabled]="carouselIndex === 0"
+          aria-label="Previous"
+        >
+          <i class="ti ti-chevron-left"></i>
+        </button>
+
+        <!-- Pagination dots – now using totalSlides -->
+        <div class="dest-carousel-dots">
+          <button
+            *ngFor="let page of totalSlidesArray; let i = index"
+            class="dot"
+            [class.active]="carouselIndex === i"
+            (click)="setSlide(i)"
+            [attr.aria-label]="'Go to slide ' + (i + 1)"
+          ></button>
+        </div>
+
+        <button
+          class="dest-carousel-btn"
+          (click)="nextSlide()"
+          [disabled]="carouselIndex >= totalSlides - 1"
+          aria-label="Next"
+        >
+          <i class="ti ti-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Page counter – uses totalSlides -->
+      <div class="page-counter" *ngIf="totalSlides > 1">
+        <span class="current-page">{{ carouselIndex + 1 }}</span>
+        <span class="separator">/</span>
+        <span class="total-pages">{{ totalSlides }}</span>
+        <span class="counter-label">pages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="section why-section">
+  <div class="why-overlay"></div>
+  <div class="section-container why-content">
+    <h2 class="section-title white">Why Choose Airline</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon green"><i class="ti ti-clock-check"></i></div>
+        <h3>On-Time Performance</h3>
+        <p>We pride ourselves on punctual departures and arrivals.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon blue"><i class="ti ti-armchair"></i></div>
+        <h3>Comfortable Cabins</h3>
+        <p>Spacious seating and premium amenities on every flight.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange"><i class="ti ti-users-group"></i></div>
+        <h3>Experienced Crew</h3>
+        <p>Competitive pricing without compromising quality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY TICKETS -->
+<section id="my-tickets" class="section tickets-section" *ngIf="myTickets.length > 0">
+  <div class="section-container">
+    <h2 class="section-title">My Tickets</h2>
+    <div class="tickets-grid">
+      <div class="ticket-card" *ngFor="let ticket of myTickets">
+        <div class="ticket-header">
+          <i class="ti ti-ticket"></i>
+          <span class="ticket-status" [class.active]="ticket.status === 'Active'">
+            {{ ticket.status }}
+          </span>
+        </div>
+        <div class="ticket-route">
+          <span>{{ ticket.fromCity }}</span>
+          <i class="ti ti-arrow-right"></i>
+          <span>{{ ticket.toCity }}</span>
+        </div>
+        <div class="ticket-meta">
+          <i class="ti ti-calendar"></i>
+          <span>{{ ticket.bookingDate | date: 'short' }}</span>
+        </div>
+        <button class="btn-cancel" (click)="cancelTicket(ticket.id)">
+          <i class="ti ti-x"></i> Cancel Ticket
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT US -->
+<section id="contact" class="section contact-section">
+  <div class="section-container">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="ti ti-map-pin"></i>
+          <div>
+            <strong>Address</strong>
+            <p>El Of Ramadan · Cairo · Egypt</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="ti ti-mail"></i>
+          <div>
+            <strong>Email</strong>
+            <p>skyline&#64;gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="ti ti-phone"></i>
+          <div>
+            <strong>Phone</strong>
+            <p>+20 10 232 13148</p>
+          </div>
+        </div>
+      </div>
+
+      <form [formGroup]="contactForm" (ngSubmit)="submitContact()" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your Name" formControlName="FullName" />
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" placeholder="Your Company" formControlName="Company" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Your Email" formControlName="Email" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" placeholder="Your Phone" formControlName="PhoneNumber" />
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Address</label>
+          <input type="text" placeholder="Your Address" formControlName="Address" />
+        </div>
+        <div class="form-group full">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Your Message" formControlName="Message"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" [disabled]="contactForm.invalid">
+          <i class="ti ti-send"></i> Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

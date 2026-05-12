@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* Page Shell */
+.auth-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Hero Panel */
+.auth-hero {
+  flex: 0 0 60%;
+  position: relative;
+  overflow: hidden;
+  background-image: url('../../../assets/images/Plane.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(8, 20, 60, 0.6) 0%, rgba(0, 0, 0, 0.18) 100%);
+}
+
+/* Brand */
+.hero-brand {
+  position: absolute;
+  top: 36px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon i {
+  color: #fff;
+  font-size: 20px;
+}
+
+.brand-name {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Tagline */
+.hero-tagline {
+  position: absolute;
+  bottom: 48px;
+  left: 40px;
+  right: 40px;
+  z-index: 2;
+}
+
+.hero-tagline h2 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.hero-tagline p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 6px 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.hero-badge i {
+  font-size: 13px;
+}
+
+/* Form Panel */
+.auth-form-panel {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  border-left: 1px solid #e5e7eb;
+}
+
+.auth-form-scroll {
+  width: 100%;
+  max-width: 420px;
+  padding: 48px 40px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .auth-hero {
+    display: none;
+  }
+
+  .auth-form-panel {
+    flex: 1;
+    border-left: none;
+  }
+}

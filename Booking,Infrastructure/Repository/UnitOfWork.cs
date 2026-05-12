@@ -20,11 +20,12 @@ namespace Booking_Infrastructure.Repository
 
         public IContactUsRepository ContactUsRepository { get; }
 
-        public UnitOfWork(ApplicationDbContext context, ITripRepository tripRepository, ITicketRepository ticketRepository)
+        public UnitOfWork(ApplicationDbContext context, ITripRepository tripRepository, ITicketRepository ticketRepository,IContactUsRepository contactUsRepository)
         {
             _context = context;
             TripRepository = tripRepository;
             TicketRepository = ticketRepository;
+            ContactUsRepository = contactUsRepository;
             _repositories = new Hashtable();
         }
 
