@@ -12,8 +12,8 @@ import { TripService } from '../../services/trip.service';
 import { TicketService } from '../../services/ticket.service';
 import { BookTripService } from '../../services/book-trip.service';
 import { ContactUsService } from '../../services/contact-us.service';
-import { TripDto } from '../../Interfaces/interfaces/trip-dto';
-import { TicketDto } from '../../Interfaces/interfaces/ticket-dto';
+import { TripDto } from '../../Interfaces/trip-dto';
+import { TicketDto } from '../../Interfaces/ticket-dto';
 
 @Component({
   selector: 'app-home',
@@ -153,15 +153,15 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadMyTickets() {
-  this.ticketService.getMyTickets().subscribe({
-    next: (data) => {
-      this.myTickets = [...data];
-      this.cdr.detectChanges();  
-    },
-    error: (error) =>
-      this.displayAlert('Failed to load tickets. ' + (error?.error?.message || ''), 'danger'),
-  });
-}
+    this.ticketService.getMyTickets().subscribe({
+      next: (data) => {
+        this.myTickets = [...data];
+        this.cdr.detectChanges();
+      },
+      error: (error) =>
+        this.displayAlert('Failed to load tickets. ' + (error?.error?.message || ''), 'danger'),
+    });
+  }
   bookTrip(tripId: number) {
     this.bookTripService.bookTrip({ TripId: tripId }).subscribe({
       next: () => {

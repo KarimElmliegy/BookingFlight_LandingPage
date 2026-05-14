@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { CreateContactUsDto } from '../Interfaces/interfaces/create-contact-us-dto';
+import { CreateContactUsDto } from '../Interfaces/create-contact-us-dto';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CreateApiService } from './base-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContactUsService {
-  private readonly endpoint = '/api/ContactUs';
+export class ContactUsService extends CreateApiService<CreateContactUsDto> {
+  // private readonly endpoint = '/api/ContactUs';
 
-  constructor(private http: HttpClient) {}
+  constructor(http: HttpClient) {
+    super(http, '/api/ContactUs/send-message');
+  }
 
-  sendMessage(data: CreateContactUsDto): Observable<any> {
-    return this.http.post(`${this.endpoint}/send-message`, data);
+  sendMessage(data: CreateContactUsDto) {
+    return this.create(data);
   }
 }

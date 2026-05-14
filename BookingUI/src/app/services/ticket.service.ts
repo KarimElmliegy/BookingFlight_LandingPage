@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TicketDto } from '../Interfaces/interfaces/ticket-dto';
+import { TicketDto } from '../Interfaces/ticket-dto';
 import { HttpClient } from '@angular/common/http';
 import { BaseApiService } from './base-api.service';
 import { Observable } from 'rxjs';

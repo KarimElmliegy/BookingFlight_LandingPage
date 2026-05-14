@@ -17,20 +17,23 @@ export abstract class BaseApiService<TResponse> {
   }
 }
 
-export abstract class CreateApiService<TCreate, TResponse = void> {
-  constructor( protected http: HttpClient, protected endpoint: string ) {}
+export abstract class CreateApiService<TCreate, TResponse = void> extends BaseApiService<TResponse>{
+  constructor( http: HttpClient, endpoint: string ) {
+    super(http,endpoint)
+  }
 
   create(data: TCreate): Observable<TResponse> {
     return this.http.post<TResponse>(this.endpoint, data);
   }
 }
 
-export abstract class CrudApiService<TResponse,TCreate,TUpdate> extends BaseApiService<TResponse> {
+export abstract class CrudApiService<TResponse,TCreate,TUpdate> extends  CreateApiService<TCreate, TResponse> {
 
-  create(data: TCreate): Observable<TResponse> {
-    return this.http.post<TResponse>(this.endpoint, data);
+
+  constructor(http:HttpClient,endPoint:string) {
+    super(http,endPoint);
+
   }
-
   update(id: number | string, data: TUpdate): Observable<TResponse> {
     return this.http.put<TResponse>(`${this.endpoint}/${id}`, data);
   }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CreateApiService } from './base-api.service';
 import { HttpClient } from '@angular/common/http';
-import { LoginDto } from '../Interfaces/interfaces/login-dto';
+import { LoginDto } from '../Interfaces/login-dto';
 import { environment } from '../../environments/environment';
 import { endWith, Observable } from 'rxjs';
-import { AuthResponseDto } from '../Interfaces/interfaces/auth-response-dto';
-import { RegisterDto } from '../Interfaces/interfaces/register-dto';
+import { AuthResponseDto } from '../Interfaces/auth-response-dto';
+import { RegisterDto } from '../Interfaces/register-dto';
 
 @Injectable({
   providedIn: 'root',

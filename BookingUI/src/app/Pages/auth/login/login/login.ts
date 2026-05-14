@@ -37,7 +37,6 @@ export class Login {
           localStorage.setItem('displayName', response.displayName);
           localStorage.setItem('email', response.email);
           localStorage.setItem('userId', response.id?.toString() ?? '');
-          this.showAlertMessage('Login successful! Redirecting...', 'success');
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 1000);
