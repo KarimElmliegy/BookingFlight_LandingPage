@@ -11,46 +11,40 @@
     <!-- Links -->
     <ul class="nav-links">
       <li>
-        <a (click)="scrollTo('hero')" class="nav-link" [class.active]="activeSection === 'hero'"
-          >Home</a
-        >
+        <a routerLink="/home" class="nav-link" routerLinkActive="active">Home</a>
       </li>
+
       <li>
-        <a
-          (click)="scrollTo('destinations')"
-          class="nav-link"
-          [class.active]="activeSection === 'destinations'"
-          >Destinations</a
-        >
+        <a routerLink="/My-Tickets" routerLinkActive="active" class="nav-link">My Tickets</a>
       </li>
+
       <li>
-        <a
-          (click)="scrollTo('my-tickets')"
-          class="nav-link"
-          [class.active]="activeSection === 'my-tickets'"
-          >My Tickets</a
-        >
+        <a routerLink="/checkout" routerLinkActive="active" class="nav-link">checkout</a>
       </li>
+
       <li>
-        <a
-          (click)="scrollTo('contact')"
-          class="nav-link"
-          [class.active]="activeSection === 'contact'"
-          >Contact</a
-        >
+        <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a>
       </li>
     </ul>
 
     <!-- User -->
-    <div class="nav-user">
-      <div class="user-avatar">
-        <i class="ti ti-user"></i>
+    <div class="nav-user dropdown-user">
+      <div class="user-trigger">
+        <div class="user-avatar">
+          <i class="ti ti-user"></i>
+        </div>
+
+        <span class="user-name">{{ displayName }}</span>
+
+        <i class="ti ti-chevron-down dropdown-icon"></i>
       </div>
-      <span class="user-name">{{ displayName }}</span>
-      <button class="btn-logout" (click)="logout()">
-        <i class="ti ti-logout"></i>
-        Logout
-      </button>
+
+      <div class="user-dropdown-menu">
+        <button class="dropdown-item logout-item" (click)="logout()">
+          <i class="ti ti-logout"></i>
+          Sign Out
+        </button>
+      </div>
     </div>
   </div>
 </nav>

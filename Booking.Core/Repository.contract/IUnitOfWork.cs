@@ -15,6 +15,8 @@ namespace Booking.Core.Repository.contract
 
         IContactUsRepository ContactUsRepository { get; }
 
+        IOrderRepository OrderRepository { get; }
+
         Task<int> SaveChangesAsync();
     }
 }

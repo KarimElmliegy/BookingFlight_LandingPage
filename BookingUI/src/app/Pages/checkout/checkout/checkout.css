@@ -1,0 +1,699 @@
+/* Background Image Container */
+.bg-image {
+  background-image: url('../../../../assets/images/hero-airplane.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 120vh;
+  padding: 2rem 0;
+}
+
+.checkout-container {
+  position: relative;
+  z-index: 1;
+}
+.checkout-main {
+  margin: 0 100px;
+}
+.stepper-shell {
+  width: 100%;
+  padding: 14px 16px;
+}
+
+.stepper {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 22px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 35px rgba(77, 87, 163, 0.12);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.step-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 52px;
+  background: #eef2ff;
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.14);
+}
+
+.step.completed .step-icon {
+  background: linear-gradient(135deg, #ff7a2f, #ff5a1f);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(255, 122, 47, 0.28);
+}
+
+.step.active .step-icon {
+  background: linear-gradient(135deg, #ff7a2f, #ff5a1f);
+  color: #fff;
+  box-shadow: 0 0 0 6px rgba(255, 122, 47, 0.12);
+}
+
+.step-text {
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.step-text h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #26324a;
+  white-space: nowrap;
+}
+
+.step-text p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #8b95a7;
+  white-space: nowrap;
+}
+
+.step-line {
+  height: 2px;
+  flex: 1 1 120px;
+  min-width: 48px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(226, 232, 240, 1), rgba(226, 232, 240, 0.55));
+  position: relative;
+  top: -2px;
+}
+
+.step-line.done {
+  background: linear-gradient(90deg, #ff7a2f, rgba(255, 122, 47, 0.25));
+}
+
+@media (max-width: 992px) {
+  .stepper {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .stepper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .step {
+    flex: 0 0 auto;
+  }
+
+  .step-line {
+    flex: 0 0 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stepper {
+    padding: 14px 16px;
+    gap: 12px;
+    border-radius: 18px;
+  }
+
+  .step-icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .step-text h4 {
+    font-size: 13px;
+  }
+
+  .step-text p {
+    font-size: 11px;
+  }
+
+  .step-line {
+    flex-basis: 52px;
+    min-width: 52px;
+  }
+}
+/* Form Card */
+.form-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.header-icon {
+  width: 45px;
+  height: 45px;
+  background: #ff6b35;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.form-content {
+  padding: 2rem;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #fafbfc;
+}
+
+.form-control:focus {
+  border-color: #ff6b35;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: #bbb;
+}
+
+/* Input with Icon */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 1rem;
+  color: #999;
+  font-size: 1.1rem;
+}
+
+.input-with-icon .form-control {
+  padding-left: 2.75rem;
+}
+
+.input-with-icon select.form-control {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-color: #fafbfc;
+}
+
+/* Input Group Custom */
+.input-group-custom {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.country-code-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: white;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  min-width: 90px;
+}
+
+.flag-icon {
+  width: 24px;
+  height: 16px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.country-code-input .code {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Section Divider */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0 1.5rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.section-divider i {
+  color: #ff6b35;
+  font-size: 1.2rem;
+}
+
+.section-divider h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.trust-badges {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(5px);
+}
+.badge-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.badge-item:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.badge-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #ff6b35, #e55a2b);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.badge-content h5 {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.badge-content p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Booking Summary Card */
+.booking-summary-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: sticky;
+  top: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.summary-header {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-title i {
+  color: #ff6b35;
+  font-size: 1.5rem;
+}
+
+.header-title h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.edit-link {
+  color: #ff6b35;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.edit-link:hover {
+  color: #e55a2b;
+  gap: 0.75rem;
+}
+
+/* Flight Details */
+.flight-details {
+  padding: 1.5rem;
+  background: #f8f9fa;
+}
+
+.route-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.location-item {
+  text-align: center;
+}
+
+.location-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.location-code {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.flight-line {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+}
+
+.flight-line i {
+  color: #ff6b35;
+  font-size: 1.5rem;
+}
+
+.duration {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.time-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.time-item {
+  flex: 1;
+  text-align: center;
+}
+
+.time {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Booking Info Grid */
+.booking-info-grid {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.info-item i {
+  color: #ff6b35;
+  font-size: 1.1rem;
+  margin-top: 2px;
+}
+
+.info-item .label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.info-item .value {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Price Breakdown */
+.price-breakdown {
+  padding: 1.5rem;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.price-item:last-child {
+  margin-bottom: 0;
+}
+
+.price-item .label {
+  color: #666;
+  font-weight: 500;
+}
+
+.price-item .price {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Total Section */
+.total-section {
+  padding: 1.5rem;
+}
+
+.total-box {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.total-label {
+  margin: 0 0 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.total-price {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.total-price span {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-left: 0.5rem;
+}
+
+.btn-proceed {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ff6b35, #e55a2b);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.btn-proceed:hover {
+  background: linear-gradient(135deg, #e55a2b, #d4492a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
+}
+
+.btn-proceed:active {
+  transform: translateY(0);
+}
+
+.security-text {
+  margin-top: 1rem;
+  text-align: center;
+  color: #28a745;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .booking-summary-card {
+    position: static;
+    margin-top: 2rem;
+  }
+
+  .checkout-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .bg-image {
+    min-height: auto;
+    background-size: contain;
+    background-position: top center;
+  }
+
+  .checkout-header {
+    padding: 1.5rem 0;
+  }
+
+  .checkout-title {
+    font-size: 1.75rem;
+  }
+
+  .form-content {
+    padding: 1.5rem;
+  }
+
+  .trust-badges {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .total-price {
+    font-size: 1.5rem;
+  }
+
+  .booking-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout-title {
+    font-size: 1.5rem;
+  }
+
+  .card-header {
+    padding: 1rem;
+  }
+
+  .form-content {
+    padding: 1rem;
+  }
+
+  .flight-details {
+    padding: 1rem;
+  }
+
+  .route-section {
+    gap: 0.5rem;
+  }
+
+  .flight-line {
+    padding: 0 0.5rem;
+  }
+
+  .location-name {
+    font-size: 1rem;
+  }
+}

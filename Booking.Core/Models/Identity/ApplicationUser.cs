@@ -12,5 +12,6 @@ namespace Booking.Core.Models.Identity
 
         public ICollection<ContactUsMessage> ContactUsMessages { get; set; } = new List<ContactUsMessage>();
 
+        public ICollection<Order> UserOrders { get; set; } = new List<Order>();
     }
 }

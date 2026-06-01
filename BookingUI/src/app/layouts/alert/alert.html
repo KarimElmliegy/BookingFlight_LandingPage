@@ -1,0 +1,10 @@
+<!-- Alert Toast -->
+<div
+  *ngIf="showAlert"
+  class="alert-toast"
+  [class.alert-success]="alertType === 'success'"
+  [class.alert-danger]="alertType === 'danger'"
+>
+  <i [class]="alertType === 'success' ? 'ti ti-circle-check' : 'ti ti-alert-circle'"></i>
+  <span>{{ alertMessage }}</span>
+</div>

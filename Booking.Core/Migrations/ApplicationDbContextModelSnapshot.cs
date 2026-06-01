@@ -73,6 +73,37 @@ namespace Booking.Core.Migrations
                     b.ToTable("ContactUs");
                 });
 
+            modelBuilder.Entity("Booking.Core.Models.Booking.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("Booking.Core.Models.Booking.Ticket", b =>
                 {
                     b.Property<int>("Id")
@@ -84,9 +115,23 @@ namespace Booking.Core.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("TripId")
                         .HasColumnType("int");
@@ -95,6 +140,8 @@ namespace Booking.Core.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("TripId");
 
@@ -113,7 +160,8 @@ namespace Booking.Core.Migrations
 
                     b.Property<string>("FromCity")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -124,7 +172,8 @@ namespace Booking.Core.Migrations
 
                     b.Property<string>("ToCity")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -178,7 +227,8 @@ namespace Booking.Core.Migrations
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -347,8 +397,23 @@ namespace Booking.Core.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Booking.Core.Models.Booking.Order", b =>
+                {
+                    b.HasOne("Booking.Core.Models.Identity.ApplicationUser", "User")
+                        .WithMany("UserOrders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Booking.Core.Models.Booking.Ticket", b =>
                 {
+                    b.HasOne("Booking.Core.Models.Booking.Order", "Order")
+                        .WithMany("Tickets")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("Booking.Core.Models.Booking.Trip", "Trip")
                         .WithMany("Tickets")
                         .HasForeignKey("TripId")
@@ -360,6 +425,8 @@ namespace Booking.Core.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
 
                     b.Navigation("Trip");
 
@@ -417,6 +484,11 @@ namespace Booking.Core.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Booking.Core.Models.Booking.Order", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
             modelBuilder.Entity("Booking.Core.Models.Booking.Trip", b =>
                 {
                     b.Navigation("Tickets");
@@ -427,6 +499,8 @@ namespace Booking.Core.Migrations
                     b.Navigation("ContactUsMessages");
 
                     b.Navigation("Tickets");
+
+                    b.Navigation("UserOrders");
                 });
 #pragma warning restore 612, 618
         }

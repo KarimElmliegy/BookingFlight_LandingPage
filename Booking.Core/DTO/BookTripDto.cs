@@ -6,5 +6,7 @@ namespace Booking.Core.DTOs
     {
         [Required(ErrorMessage = "Trip Id is required.")]
         public int TripId { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

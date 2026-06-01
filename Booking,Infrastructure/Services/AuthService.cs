@@ -35,7 +35,8 @@ namespace Booking_Infrastructure.Services
             {
                 DisplayName = dto.DisplayName,
                 UserName = dto.UserName,
-                Email = dto.Email
+                Email = dto.Email ,
+                PhoneNumber = dto.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, dto.Password);
@@ -51,6 +52,7 @@ namespace Booking_Infrastructure.Services
                 DisplayName = user.DisplayName,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
                 Token = token
             };
         }
@@ -74,6 +76,7 @@ namespace Booking_Infrastructure.Services
                 Id = user.Id,
                 DisplayName = user.DisplayName,
                 UserName = user.UserName,
+                PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 Token = token
             };

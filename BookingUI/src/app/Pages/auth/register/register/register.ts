@@ -26,6 +26,7 @@ export class Register {
       DisplayName: ['', Validators.required],
       UserName: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: ['', Validators.required],
       Password: ['', Validators.required],
       ConfirmPassword: ['', Validators.required],
     });
@@ -40,6 +41,7 @@ export class Register {
           localStorage.setItem('userName', response.userName);
           localStorage.setItem('displayName', response.displayName);
           localStorage.setItem('email', response.email);
+          localStorage.setItem('PhoneNumber', response.PhoneNumber);
           localStorage.setItem('userId', response.id?.toString() ?? '');
 
           this.showAlertMessage('Account created successfully! Redirecting...', 'success');

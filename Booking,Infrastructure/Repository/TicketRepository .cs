@@ -36,7 +36,14 @@ namespace Booking_Infrastructure.Repository
             return await _context.Tickets
                 .Include(t => t.User)
                 .Include(t => t.Trip)
+                .Include(t => t.Order)
+                .ThenInclude(t => t.Tickets) 
                 .FirstOrDefaultAsync(t => t.Id == ticketId);
+        }
+
+        public async Task<Ticket?> GetPendingTicketForOrderAndTripAsync(int orderId, int tripId)
+        {
+            return await _context.Tickets.FirstOrDefaultAsync(t => t.OrderId == orderId && t.TripId == tripId);
         }
     }
 }

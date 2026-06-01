@@ -107,7 +107,6 @@
 .hero-badge i {
   font-size: 13px;
 }
-
 /* Form Panel */
 .auth-form-panel {
   flex: 1;
@@ -121,18 +120,19 @@
 
 .auth-form-scroll {
   width: 100%;
-  max-width: 420px;
-  padding: 48px 40px;
+  max-width: 100%;          /* remove the 420px cap */
+  padding: 48px 40px;       /* breathing room on sides */
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .auth-hero {
-    display: none;
+@media (min-width: 1400px) {
+  .auth-form-scroll {
+    padding: 48px 56px;     /* more padding on wide screens */
   }
+}
 
-  .auth-form-panel {
-    flex: 1;
-    border-left: none;
-  }
+@media (max-width: 900px) {
+  .auth-hero { display: none; }
+  .auth-form-panel { border-left: none; }
+  .auth-form-scroll { padding: 32px 24px; }
 }

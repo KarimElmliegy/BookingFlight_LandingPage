@@ -5,57 +5,49 @@ import {
   AfterViewInit,
   HostListener,
   ChangeDetectorRef,
+  ViewChild,
 } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TripService } from '../../services/trip.service';
 import { TicketService } from '../../services/ticket.service';
 import { BookTripService } from '../../services/book-trip.service';
-import { ContactUsService } from '../../services/contact-us.service';
 import { TripDto } from '../../Interfaces/trip-dto';
 import { TicketDto } from '../../Interfaces/ticket-dto';
+import { AlertService } from '../../services/alert';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ReactiveFormsModule, DatePipe],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
   standalone: true,
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   trips: TripDto[] = [];
-  myTickets: TicketDto[] = [];
-  contactForm: FormGroup;
+  tripQuantities: { [tripId: number]: number } = {};
+
   carouselIndex = 0;
   visibleCount = 3;
 
-  showAlert = false;
-  alertMessage = '';
-  alertType: 'success' | 'danger' = 'success';
   isLoadingTrips = true;
 
   constructor(
+    private alertService: AlertService,
     private tripService: TripService,
-    private ticketService: TicketService,
     private bookTripService: BookTripService,
-    private contactUsService: ContactUsService,
-    private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-  ) {
-    this.contactForm = this.fb.group({
-      FullName: ['', Validators.required],
-      Company: [''],
-      Email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: [''],
-      Address: [''],
-      Message: ['', Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.updateVisibleCount();
     this.loadTrips();
-    this.loadMyTickets();
   }
 
   ngAfterViewInit() {
@@ -91,13 +83,17 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     this.tripService.getAll().subscribe({
       next: (data: any) => {
         const tripsArray = Array.isArray(data) ? data : (data?.$values ?? []);
-        this.trips = tripsArray.map((trip: any) => ({
-          id: trip.id ?? trip.Id,
-          fromCity: trip.fromCity ?? trip.FromCity,
-          toCity: trip.toCity ?? trip.ToCity,
-          price: trip.price ?? trip.Price,
-          imageUrl: trip.imageUrl ?? trip.ImageUrl,
-        })) as TripDto[];
+        this.trips = tripsArray.map((trip: any) => {
+          const id = trip.id ?? trip.Id;
+          this.tripQuantities[id] = 1; // Default quantity
+          return {
+            id,
+            fromCity: trip.fromCity ?? trip.FromCity,
+            toCity: trip.toCity ?? trip.ToCity,
+            price: trip.price ?? trip.Price,
+            imageUrl: trip.imageUrl ?? trip.ImageUrl,
+          };
+        }) as TripDto[];
 
         this.carouselIndex = 0;
         this.isLoadingTrips = false;
@@ -107,7 +103,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       error: (err) => {
         this.isLoadingTrips = false;
         this.trips = [];
-        this.displayAlert('Failed to load trips.', 'danger');
+        this.showMessage('Failed to load trips.', 'danger');
         this.cdr.detectChanges();
       },
     });
@@ -121,8 +117,8 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       )}`;
     }
 
-    const normalized = imageFile.replace(/^\/?(assets\/)?(images\/)?/i, '');
-    return `assets/images/${normalized}`;
+    const normalized = imageFile.replace(/^\/?images\//i, '');
+    return `/images/${normalized}`;
   }
 
   // ✅ Helper: total number of carousel pages
@@ -134,7 +130,9 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   get totalSlidesArray(): number[] {
     return Array(this.totalSlides).fill(0);
   }
-
+  private showMessage(message: string, type: 'success' | 'danger') {
+    this.alertService.show(message, type);
+  }
   // ✅ Override prevSlide / nextSlide / setSlide with correct bounds
   prevSlide() {
     if (this.carouselIndex > 0) {
@@ -152,59 +150,20 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     this.carouselIndex = Math.min(Math.max(0, index), this.totalSlides - 1);
   }
 
-  loadMyTickets() {
-    this.ticketService.getMyTickets().subscribe({
-      next: (data) => {
-        this.myTickets = [...data];
-        this.cdr.detectChanges();
-      },
-      error: (error) =>
-        this.displayAlert('Failed to load tickets. ' + (error?.error?.message || ''), 'danger'),
-    });
-  }
   bookTrip(tripId: number) {
-    this.bookTripService.bookTrip({ TripId: tripId }).subscribe({
+    const quantity = this.tripQuantities[tripId] || 1;
+    this.bookTripService.bookTrip({ TripId: tripId, quantity: quantity }).subscribe({
       next: () => {
-        this.displayAlert('✈️ Ticket booked successfully!', 'success');
-        this.loadMyTickets();
+        this.showMessage('✈️ Ticket booked successfully!', 'success');
       },
-      error: (err) => {
+      error: (err: any) => {
         const msg = err?.error?.message || err?.error || 'Booking failed. Please try again.';
-        this.displayAlert(msg, 'danger');
+        this.showMessage(msg, 'danger');
       },
     });
-  }
-
-  cancelTicket(ticketId: number) {
-    this.ticketService.cancelTicket(ticketId).subscribe({
-      next: () => {
-        this.displayAlert('Ticket cancelled successfully!', 'success');
-        this.loadMyTickets();
-      },
-      error: () => this.displayAlert('Failed to cancel ticket. Please try again.', 'danger'),
-    });
-  }
-
-  submitContact() {
-    if (this.contactForm.valid) {
-      this.contactUsService.sendMessage(this.contactForm.value).subscribe({
-        next: () => {
-          this.displayAlert('Message sent successfully!', 'success');
-          this.contactForm.reset();
-        },
-        error: () => this.displayAlert('Failed to send message. Please try again.', 'danger'),
-      });
-    }
   }
 
   scrollTo(sectionId: string) {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  private displayAlert(message: string, type: 'success' | 'danger') {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.showAlert = true;
-    setTimeout(() => (this.showAlert = false), 4000);
   }
 }

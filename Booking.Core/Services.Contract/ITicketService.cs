@@ -8,7 +8,8 @@ namespace Booking.Core.Services.Contract
 {
     public interface ITicketService
     {
-        Task<TicketDto> BookTripAsync(int userId, int tripId);
+        public  Task<TicketDto> BookTripAsync(int userId, int tripId, int quantity); 
+
         Task<IEnumerable<TicketDto>> GetUserTicketsAsync(int userId);
         Task<TicketDto?> GetTicketDetailsAsync(int ticketId);
         Task CancelTicketAsync(int ticketId);

@@ -3,5 +3,6 @@ export interface AuthResponseDto {
   displayName: string;
   userName: string;
   email: string;
+  phoneNumber: string;
   token: string;
 }

@@ -1,14 +1,3 @@
-<!-- Alert Toast -->
-<div
-  *ngIf="showAlert"
-  class="alert-toast"
-  [class.alert-success]="alertType === 'success'"
-  [class.alert-danger]="alertType === 'danger'"
->
-  <i [class]="alertType === 'success' ? 'ti ti-circle-check' : 'ti ti-alert-circle'"></i>
-  <span>{{ alertMessage }}</span>
-</div>
-
 <!-- HERO -->
 <section id="hero" class="hero-section">
   <div class="hero-overlay"></div>
@@ -76,6 +65,34 @@
                     <span class="city-name">{{ trip.toCity }}</span>
                   </div>
                 </div>
+
+                <div class="d-flex align-items-center gap-2">
+                  <label
+                    [for]="'quantity-' + trip.id"
+                    style="
+                      font-family: 'DM Sans', sans-serif;
+                      font-size: 14px;
+                      font-weight: 600;
+                      color: var(--gray-700);
+                    "
+                    >Tickets:</label
+                  >
+                  <input
+                    type="number"
+                    [id]="'quantity-' + trip.id"
+                    [(ngModel)]="tripQuantities[trip.id]"
+                    min="1"
+                    style="
+                      width: 70px;
+                      padding: 6px 10px;
+                      border: 1px solid var(--gray-200);
+                      border-radius: var(--radius-sm);
+                      font-family: 'DM Sans', sans-serif;
+                      outline: none;
+                    "
+                  />
+                </div>
+
                 <div class="trip-footer">
                   <div class="trip-price">
                     <span class="price-amount">{{ trip.price | number: '1.0-0' }}</span>
@@ -153,101 +170,6 @@
         <h3>Experienced Crew</h3>
         <p>Competitive pricing without compromising quality.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- MY TICKETS -->
-<section id="my-tickets" class="section tickets-section" *ngIf="myTickets.length > 0">
-  <div class="section-container">
-    <h2 class="section-title">My Tickets</h2>
-    <div class="tickets-grid">
-      <div class="ticket-card" *ngFor="let ticket of myTickets">
-        <div class="ticket-header">
-          <i class="ti ti-ticket"></i>
-          <span class="ticket-status" [class.active]="ticket.status === 'Active'">
-            {{ ticket.status }}
-          </span>
-        </div>
-        <div class="ticket-route">
-          <span>{{ ticket.fromCity }}</span>
-          <i class="ti ti-arrow-right"></i>
-          <span>{{ ticket.toCity }}</span>
-        </div>
-        <div class="ticket-meta">
-          <i class="ti ti-calendar"></i>
-          <span>{{ ticket.bookingDate | date: 'short' }}</span>
-        </div>
-        <button class="btn-cancel" (click)="cancelTicket(ticket.id)">
-          <i class="ti ti-x"></i> Cancel Ticket
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT US -->
-<section id="contact" class="section contact-section">
-  <div class="section-container">
-    <h2 class="section-title">Contact Us</h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="contact-item">
-          <i class="ti ti-map-pin"></i>
-          <div>
-            <strong>Address</strong>
-            <p>El Of Ramadan · Cairo · Egypt</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="ti ti-mail"></i>
-          <div>
-            <strong>Email</strong>
-            <p>skyline&#64;gmail.com</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="ti ti-phone"></i>
-          <div>
-            <strong>Phone</strong>
-            <p>+20 10 232 13148</p>
-          </div>
-        </div>
-      </div>
-
-      <form [formGroup]="contactForm" (ngSubmit)="submitContact()" class="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Your Name" formControlName="FullName" />
-          </div>
-          <div class="form-group">
-            <label>Company</label>
-            <input type="text" placeholder="Your Company" formControlName="Company" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="Your Email" formControlName="Email" />
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" placeholder="Your Phone" formControlName="PhoneNumber" />
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Address</label>
-          <input type="text" placeholder="Your Address" formControlName="Address" />
-        </div>
-        <div class="form-group full">
-          <label>Message</label>
-          <textarea rows="4" placeholder="Your Message" formControlName="Message"></textarea>
-        </div>
-        <button type="submit" class="btn-primary" [disabled]="contactForm.invalid">
-          <i class="ti ti-send"></i> Send Message
-        </button>
-      </form>
     </div>
   </div>
 </section>

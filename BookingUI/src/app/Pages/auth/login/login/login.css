@@ -4,7 +4,8 @@
 /* ─── Container ──────────────────────────────────────────────── */
 .auth-form-container {
   width: 100%;
-  font-family: 'DM Sans', sans-serif;
+  max-width: 480px;   /* keeps fields readable, not stretched too wide */
+  margin: 0 auto;     /* centers within the panel */
 }
 
 /* ─── Header ─────────────────────────────────────────────────── */

@@ -1,0 +1,61 @@
+/* ═══════════════════════════════════════
+   ALERT TOAST
+═══════════════════════════════════════ */
+.alert-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: var(--radius-md);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  max-width: 420px;
+  animation:
+    slideIn 0.35s ease,
+    fadeOut 0.4s ease 3.6s forwards;
+}
+.alert-toast i {
+  font-size: 20px;
+}
+.alert-toast.alert-success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+.alert-toast.alert-success i {
+  color: #10b981;
+}
+.alert-toast.alert-danger {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+.alert-toast.alert-danger i {
+  color: #ef4444;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

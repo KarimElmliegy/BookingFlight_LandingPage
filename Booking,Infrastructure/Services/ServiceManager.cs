@@ -24,9 +24,15 @@ namespace Booking_Infrastructure.Services
 
         private readonly Lazy<IContactUsService> _contactUsService = new(() => new ContactUsService(unitOfWork, mapper));
 
+        private readonly Lazy<IOrderService> _OrderService = new(() => new OrderService(unitOfWork, mapper));
+
+
+        public IOrderService OrderService => _OrderService.Value; 
+
         public IAuthService AuthService => _authService.Value;
         public ITripService TripService => _tripService.Value;
         public ITicketService TicketService => _ticketService.Value;
         public IContactUsService ContactUsService => _contactUsService.Value;
+
     }
 }

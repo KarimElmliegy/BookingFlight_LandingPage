@@ -22,19 +22,19 @@ namespace BookingSystem.API.Controllers
         }
 
         [HttpPost("book")]
-        public async Task<IActionResult> BookTrip([FromBody] BookTripDto dto)
+        public async Task<ActionResult> BookTrip([FromBody] BookTripDto dto)
         {
             var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (!int.TryParse(userIdValue, out var userId))
                 return Unauthorized();
 
-            var ticket = await _serviceManager.TicketService.BookTripAsync(userId, dto.TripId);
+            var ticket = await _serviceManager.TicketService.BookTripAsync(userId, dto.TripId,dto.Quantity);
             return Ok(ticket);
         }
 
         [HttpGet("my-tickets")]
-        public async Task<IActionResult> GetMyTickets()
+        public async Task<ActionResult<IEnumerable<TicketDto>>> GetMyTickets()
         {
             var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -46,7 +46,7 @@ namespace BookingSystem.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTicketDetails(int id)
+        public async Task<ActionResult> GetTicketDetails(int id)
         {
             var ticket = await _serviceManager.TicketService.GetTicketDetailsAsync(id);
 
@@ -65,7 +65,7 @@ namespace BookingSystem.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> CancelTicket(int id)
+        public async Task<ActionResult> CancelTicket(int id)
         {
             var ticket = await _serviceManager.TicketService.GetTicketDetailsAsync(id);
 

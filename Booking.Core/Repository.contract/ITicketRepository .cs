@@ -10,6 +10,7 @@ namespace Booking.Core.Repository.contract
         Task<IEnumerable<Ticket>> GetTicketsByUserIdAsync(int userId);
         Task<IEnumerable<Ticket>> GetTicketsByTripIdAsync(int tripId);
         Task<Ticket?> GetTicketWithDetailsAsync(int ticketId);
+        public  Task<Ticket?> GetPendingTicketForOrderAndTripAsync(int orderId, int tripId); 
 
     }
 }

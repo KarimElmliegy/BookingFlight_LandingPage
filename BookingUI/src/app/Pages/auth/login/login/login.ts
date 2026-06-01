@@ -35,6 +35,7 @@ export class Login {
           localStorage.setItem('token', response.token);
           localStorage.setItem('userName', response.userName);
           localStorage.setItem('displayName', response.displayName);
+          localStorage.setItem('PhoneNumber', response.phoneNumber);
           localStorage.setItem('email', response.email);
           localStorage.setItem('userId', response.id?.toString() ?? '');
           setTimeout(() => {

@@ -1,0 +1,66 @@
+<!-- CONTACT US -->
+<section id="contact" class="section contact-section">
+  <div class="section-container">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="ti ti-map-pin"></i>
+          <div>
+            <strong>Address</strong>
+            <p>El Of Ramadan · Cairo · Egypt</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="ti ti-mail"></i>
+          <div>
+            <strong>Email</strong>
+            <p>skyline&#64;gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="ti ti-phone"></i>
+          <div>
+            <strong>Phone</strong>
+            <p>+20 10 232 13148</p>
+          </div>
+        </div>
+      </div>
+
+      <form [formGroup]="contactForm" (ngSubmit)="submitContact()" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your Name" formControlName="FullName" />
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" placeholder="Your Company" formControlName="Company" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Your Email" formControlName="Email" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" placeholder="Your Phone" formControlName="PhoneNumber" />
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Address</label>
+          <input type="text" placeholder="Your Address" formControlName="Address" />
+        </div>
+        <div class="form-group full">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Your Message" formControlName="Message"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" [disabled]="contactForm.invalid">
+          <i class="ti ti-send"></i> Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+

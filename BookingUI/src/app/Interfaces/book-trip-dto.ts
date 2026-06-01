@@ -1,3 +1,4 @@
 export interface BookTripDto {
-  TripId:number
+  TripId:number ,
+  quantity:number
 }

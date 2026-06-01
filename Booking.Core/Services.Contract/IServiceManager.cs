@@ -10,5 +10,7 @@ namespace Booking.Core.Services.Contract
         ITripService TripService { get; }
         ITicketService TicketService { get; }
         IContactUsService ContactUsService { get; }
+
+        IOrderService OrderService { get; }
     }
 }

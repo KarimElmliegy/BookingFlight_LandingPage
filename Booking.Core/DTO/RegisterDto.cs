@@ -17,6 +17,10 @@ namespace Booking.Core.DTO
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage ="Phone Number Required")]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
         [Required(ErrorMessage = "Password is required.")]
         [MinLength(6, ErrorMessage = "Password must be at least 6 characters.")]
         public string Password { get; set; }

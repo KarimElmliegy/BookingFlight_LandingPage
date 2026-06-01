@@ -1,6 +1,7 @@
 ﻿using Booking.Core.Data;
 using Booking.Core.Models;
 using Booking.Core.Repository.contract;
+using Booking.Core.Services.Contract;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,12 +21,15 @@ namespace Booking_Infrastructure.Repository
 
         public IContactUsRepository ContactUsRepository { get; }
 
-        public UnitOfWork(ApplicationDbContext context, ITripRepository tripRepository, ITicketRepository ticketRepository,IContactUsRepository contactUsRepository)
+        public IOrderRepository OrderRepository { get; }
+
+        public UnitOfWork(ApplicationDbContext context, ITripRepository tripRepository , IOrderRepository orderRepository, ITicketRepository ticketRepository,IContactUsRepository contactUsRepository )
         {
             _context = context;
             TripRepository = tripRepository;
             TicketRepository = ticketRepository;
             ContactUsRepository = contactUsRepository;
+            OrderRepository =  orderRepository; 
             _repositories = new Hashtable();
         }
 

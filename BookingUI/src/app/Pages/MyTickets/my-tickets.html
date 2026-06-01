@@ -1,0 +1,106 @@
+<section id="my-tickets" class="section tickets-section" style="min-height: 60vh">
+  <div class="section-container">
+    <h2 class="section-title">My Tickets</h2>
+
+    <div *ngIf="isLoading" style="text-align: center; padding: 4rem 1rem">
+      <p>Loading your tickets...</p>
+    </div>
+
+    <div
+      *ngIf="!isLoading && myTickets.length === 0"
+      style="text-align: center; padding: 4rem 1rem"
+    >
+      <p>You have no tickets currently booked.</p>
+    </div>
+
+    <div class="ticket-carousel-wrapper" *ngIf="!isLoading && myTickets.length > 0">
+      <div class="ticket-carousel-viewport">
+        <div
+          class="ticket-carousel-track"
+          [style.width]="(myTickets.length / visibleCount) * 100 + '%'"
+          [style.transform]="
+            'translateX(-' + carouselIndex * ((visibleCount * 100) / myTickets.length) + '%)'
+          "
+        >
+          <div
+            class="ticket-carousel-item"
+            *ngFor="let ticket of myTickets"
+            [style.flex]="'0 0 ' + 100 / myTickets.length + '%'"
+          >
+            <div class="ticket-card">
+              <div class="ticket-image">
+                <img
+                  [src]="getTicketImageUrl(ticket.ImageUrl, ticket.fromCity, ticket.toCity)"
+                  [alt]="ticket.fromCity + ' to ' + ticket.toCity"
+                  loading="lazy"
+                />
+                <div class="ticket-badge">
+                  <i class="ti ti-ticket"></i>
+                </div>
+              </div>
+
+              <div class="ticket-info">
+                <div class="ticket-header">
+                  <i class="ti ti-ticket"></i>
+                  <span class="ticket-status" [class.active]="ticket.status === 'Active'">
+                    {{ ticket.status }}
+                  </span>
+                </div>
+
+                <div class="ticket-route">
+                  <span>{{ ticket.fromCity }}</span>
+                  <i class="ti ti-arrow-right"></i>
+                  <span>{{ ticket.toCity }}</span>
+                </div>
+
+                <div class="ticket-meta">
+                  <i class="ti ti-calendar"></i>
+                  <span>{{ ticket.bookingDate | date: 'short' }}</span>
+                </div>
+
+                <div class="ticket-meta">
+                  <i class="ti ti-users"></i>
+                  <span>Tickets: {{ ticket.Quantity }}</span>
+                </div>
+
+                <button class="btn-cancel" (click)="cancelTicket(ticket.id)">
+                  <i class="ti ti-x"></i> Cancel Ticket
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-carousel-controls" *ngIf="totalSlides > 1">
+        <button
+          class="ticket-carousel-btn"
+          (click)="prevSlide()"
+          [disabled]="carouselIndex === 0"
+          aria-label="Previous"
+        >
+          <i class="ti ti-chevron-left"></i>
+        </button>
+
+        <div class="ticket-carousel-dots">
+          <button
+            *ngFor="let page of totalSlidesArray; let i = index"
+            class="dot"
+            [class.active]="carouselIndex === i"
+            (click)="setSlide(i)"
+            [attr.aria-label]="'Go to slide ' + (i + 1)"
+          ></button>
+        </div>
+
+        <button
+          class="ticket-carousel-btn"
+          (click)="nextSlide()"
+          [disabled]="carouselIndex >= totalSlides - 1"
+          aria-label="Next"
+        >
+          <i class="ti ti-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
